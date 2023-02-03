@@ -95,13 +95,13 @@ const Movies = () => {
     fetchData("API/Top250Movies").then((data) => {
       setMovieData(data.items);
     });
-  }, []);
+  }, [movieData]);
   return (
     <div>
       <Navbar />
       <MoviesCategory handleRequest={handleRequest} />
-      <div className="movie-div">
-        {movieData
+      <div className='movie-div'>
+        {mockData
           ? movieData?.map((info) => <MovieCard data={info} />)
           : mockData?.map((info) => <MovieCard data={info} />)}
       </div>

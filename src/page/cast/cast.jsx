@@ -11,12 +11,9 @@ const Cast = () => {
   const location = useLocation();
   const pathData = location?.pathname?.split("/");
   const movId = pathData[pathData.length - 1];
-  console.log(movId);
   useEffect(() => {
     getAllInfo(movId).then((data) => {
       setMovieData(data);
-      console.log(data);
-      console.log("all data", allData);
     });
   }, [movId]);
 
