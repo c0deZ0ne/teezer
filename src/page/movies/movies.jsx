@@ -101,7 +101,7 @@ const Movies = () => {
       <Navbar />
       <MoviesCategory handleRequest={handleRequest} />
       <div className='movie-div'>
-        {mockData
+        {!mockData
           ? movieData?.map((info) => <MovieCard data={info} />)
           : mockData?.map((info) => <MovieCard data={info} />)}
       </div>

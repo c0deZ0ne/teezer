@@ -35,7 +35,7 @@ const Homepage = () => {
           {" "}
           {window.alert(
             error === "Invalid API Key"
-              ? "Please we are out "
+              ? "Internal Server Error"
               : " Network Error"
           )}
         </>

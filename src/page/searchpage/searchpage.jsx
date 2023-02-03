@@ -3,18 +3,21 @@ import MovieCard from "../../components/movieCard/MovieCard";
 import Navbar from "../../components/navbar/navbar";
 import { getData } from "../../utils/axios";
 import "./searchpage.css";
+import Loader from "../../components/loader/Loader";
 
 const SearchPage = () => {
   const [searchParam, setSearchParam] = useState("true");
   const [movies, setMovies] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
 
   const handleChange = (e) => {
     setSearchParam(e.target.value);
   };
   const handleSearch = async () => {
+    setIsLoading(true);
     const data = await getData(searchParam);
     setMovies(data.results);
-    console.log(data);
+    setIsLoading(false);
   };
 
   return (
@@ -36,6 +39,7 @@ const SearchPage = () => {
         </label>
 
         <div className='container'>
+          {isLoading && <Loader />}
           {movies.map((data) => (
             <MovieCard data={data} />
           ))}

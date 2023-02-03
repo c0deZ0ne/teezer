@@ -3,7 +3,7 @@ const MoviesCategory = ({ handleRequest }) => {
   return (
     <>
       <div>
-        <ul className="ul">
+        <ul className='ul'>
           <li onClick={() => handleRequest("Action")}>Action</li>
           <li onClick={() => handleRequest("Adventure")}>Adventure</li>
           <li onClick={() => handleRequest("Animation")}>Animation</li>
@@ -12,12 +12,12 @@ const MoviesCategory = ({ handleRequest }) => {
           <li onClick={() => handleRequest("Documentary")}>Documentary</li>
           <li onClick={() => handleRequest("Drama")}>Drama</li>
           <li onClick={() => handleRequest("Family")}>Family</li>
-          <li onClick={() => handleRequest("Fantasy")}>FAntasy</li>
+          <li onClick={() => handleRequest("Fantasy")}>Fantasy</li>
           <li onClick={() => handleRequest("History")}>History</li>
         </ul>
       </div>
-      <div className="ul-div">
-        <ul className="ul">
+      <div className='ul-div'>
+        <ul className='ul'>
           <li onClick={() => handleRequest("Horror")}>Horror</li>
           <li onClick={() => handleRequest("Music")}>Music</li>
           <li onClick={() => handleRequest("Mystery")}>Mystery</li>
