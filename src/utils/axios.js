@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const apiKey = "k_2fd5iz0j23";
+const apiKey = "k_0pq55gfz";
 const baseURL = `https://imdb-api.com/en`;
 const config = {
   headers: {

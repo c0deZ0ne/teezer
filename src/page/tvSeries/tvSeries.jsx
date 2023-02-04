@@ -4,6 +4,7 @@ import MovieCard from "../../components/movieCard/MovieCard";
 import Navbar from "../../components/navbar/navbar";
 import TvSeriesCategory from "../../components/tvSeriescategory/tvSeriescategory";
 import { fetchData, getSeries } from "../../utils/axios";
+import Loader from "../../components/loader/Loader";
 const TvSeries = () => {
   const [movieData, setData] = useState([]);
   const handleRequest = async (resuest) => {
@@ -12,25 +13,46 @@ const TvSeries = () => {
     setData(data.results);
     console.log(data);
   };
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
-    fetchData("API/Top250TVs").then((data) => {
-      console.log(data);
-      setData(data.items);
-    });
+    setIsLoading(true);
+    fetchData("API/Top250TVs")
+      .then((data) => {
+        const { errorMessage, items } = data;
+        errorMessage ? setError(errorMessage) : setData(items);
+        setIsLoading(false);
+      })
+      .catch((err) => {
+        const { errorMessage } = err;
+        setError(errorMessage);
+        setIsLoading(false);
+      });
   }, []);
 
   return (
-    <div>
+    <>
       <Navbar />
       <TvSeriesCategory handleRequest={handleRequest} />
-
-      <div className="movie-div">
-        {movieData?.map((info) => (
-          <MovieCard data={info} />
-        ))}
-      </div>
-    </div>
+      {isLoading ? (
+        <Loader />
+      ) : (
+        <>
+          {error ? (
+            <div className='error'>{"something went wrong ..."}</div>
+          ) : (
+            movieData && (
+              <div className='movie-div'>
+                {movieData?.map((info) => (
+                  <MovieCard data={info} />
+                ))}
+              </div>
+            )
+          )}
+        </>
+      )}
+    </>
   );
 };
 

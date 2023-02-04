@@ -30,23 +30,21 @@ const Homepage = () => {
       <Navbar />
       {isLoading ? (
         <Loader />
-      ) : error ? (
+      ) : (
         <>
-          {" "}
-          {window.alert(
-            error === "Invalid API Key"
-              ? "Internal Server Error"
-              : " Network Error"
+          {error ? (
+            <div className='error'>{"something went wrong ..."}</div>
+          ) : (
+            movieData && (
+              <div className='movie-div'>
+                {movieData?.map((info) => (
+                  <MovieCard data={info} />
+                ))}
+              </div>
+            )
           )}
         </>
-      ) : (
-        <div className='movie-div'>
-          {movieData?.map((info) => (
-            <MovieCard data={info} />
-          ))}
-        </div>
       )}
-      <div className='paginate-div'></div>
     </>
   );
 };
