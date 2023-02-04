@@ -1,23 +1,31 @@
 import { useState, useEffect } from "react";
 import MovieCard from "../../components/movieCard/MovieCard";
 import Navbar from "../../components/navbar/navbar";
-import { apiPopular, getData } from "../../utils/axios";
+import { apiPopular, getData, useSearch } from "../../utils/axios";
 import "./searchpage.css";
 import Loader from "../../components/loader/Loader";
+
 const SearchPage = () => {
   const [searchParam, setSearchParam] = useState("true");
+  const [searchData, setSearchData] = useState(null);
   const [movies, setMovies] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+  const file = useSearch(searchData);
 
   const handleChange = (e) => {
     setSearchParam(e.target.value);
+
     setIsLoading(true);
   };
   const handleSearch = async () => {
     setIsLoading(true);
-    const data = await getData(searchParam);
-    setMovies(data.results);
-    setIsLoading(false);
+    setSearchData(searchParam);
+    console.log(file());
+    // allD();
+    // const data = await getData(searchParam);
+
+    // setMovies(data.results);
+    // setIsLoading(false);
   };
 
   const [movieData, setData] = useState([]);
@@ -50,7 +58,10 @@ const SearchPage = () => {
             onChange={(e) => handleChange(e)}
           />
           <div className='search-text-div'>
-            <button className='search-text' onClick={(e) => handleSearch()}>
+            <button
+              className='search-text'
+              onClick={(e) => handleSearch(searchParam)}
+            >
               Search
             </button>
           </div>

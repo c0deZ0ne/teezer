@@ -13,10 +13,8 @@ const Movies = () => {
   const [error, setError] = useState(null);
 
   const handleRequest = async (resuest) => {
-    console.log(resuest);
     const data = await getData(resuest);
     setMovieData(data.results);
-    console.log(data);
   };
 
   useEffect(() => {
@@ -32,7 +30,7 @@ const Movies = () => {
         setError(errorMessage);
         setIsLoading(false);
       });
-  }, [movieData]);
+  }, []);
   return (
     <div>
       <Navbar />
