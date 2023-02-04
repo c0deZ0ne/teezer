@@ -1,7 +1,6 @@
 import style from "./Player.module.css";
 
 function Player({ url, toggleModal, title }) {
-  console.log(url);
   return (
     <div>
       <div className={style.modal}>

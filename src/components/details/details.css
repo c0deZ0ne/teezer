@@ -1,46 +1,59 @@
-.profile-image{
-    background-color: white;
-    height: 30rem;
-    width: 23rem;
-    margin-top: 1.8rem;
-    margin-left: 4rem;
-    border-radius: 0.5rem;
+.profile-image {
+  height: 30rem;
+  width: 23rem;
+  border-radius: 0.5rem;
+  position: relative;
+  padding: 20px;
+  background-color: transparent;
+  box-shadow: 1px 1px 1px 1px;
 }
 
-.details-div{
-    display: flex;
-    
+.details-div {
+  display: flex;
+  position: relative;
+  justify-content: left;
+  align-items: center;
+  align-self: center;
+  margin: 0 auto;
+  overflow-x: hidden;
+  flex-direction: row;
+  width: 95%;
+  background-color: rgba(85, 55, 55, 0.194);
+  /* background-color: red; */
 }
-.movieTitle{
-    color: white;
-    margin-left: 3rem;
-    margin-top: 3rem;
-  
-}
-
-.description{
-    color: white;
-    margin-top: 10rem;
-  margin-left: -4rem;
-  padding-right: 4rem;
-}
-
-.play-trailer{
-    height: 3rem;
-    margin-top: -60rem;
-    margin-left: 29.5rem;
-    width: 8rem;
-    background-color: rgb(97,207,122);
-    border-radius: 0.2rem;
-    border: none;
-
-    
+.movieTitle {
+  color: white;
+  padding-left: 10px;
 }
 
-.btn{
-    margin-top: -15rem;
+.description {
+  color: white;
+  width: 80%;
+  padding-left: 10px;
+  flex-wrap: wrap;
+  position: relative;
+  display: flex;
+  flex-direction: column;
 }
 
-.release{
-   font-size: 5rem; 
+.play-trailer {
+  height: 3rem;
+  position: relative;
+  width: 8rem;
+  background-color: rgb(97, 207, 122);
+  border-radius: 0.2rem;
+  border: none;
+  padding: 10px;
+}
+
+.btn {
+  padding: 10px;
+}
+
+.release_time {
+  font-size: 1rem;
+  padding: 10px;
+  margin: 0px;
+  color: white;
+  font-size: 2rem;
 }

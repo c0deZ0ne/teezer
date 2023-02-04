@@ -10,20 +10,32 @@ const Details = ({ data }) => {
   };
 
   return (
-    <div>
-      <div className="details-div">
-        <img className="profile-image" src={data.image} alt="" />
-        <div className="movieTitle">{data.title}</div>
-        <div className="description">
-          {data.plot}
-          <span className="release">Release Date {data.releaseDate}</span>
+    <div style={{ displa: "flex", flexDirection: "column" }}>
+      <div className='details-div'>
+        <img className='profile-image' src={data.image} alt='' />
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            margin: "0px auto",
+            position: "abolute",
+            top: "50%",
+          }}
+        >
+          <div className='movieTitle'>{data.title}</div>
+          <div className='description'>{data.plot}</div>
+          <span className='release_time'>Release Date {data.releaseDate}</span>
+          <div className='btn'>
+            <button
+              onClick={() => setModalIsOpen(true)}
+              className='play-trailer'
+            >
+              Play Trailer
+            </button>
+          </div>
         </div>
       </div>
-      <div className="btn">
-        <button onClick={() => setModalIsOpen(true)} className="play-trailer">
-          Play Trailer
-        </button>
-      </div>
+
       {modalIsOpen && (
         <div>
           <Player
