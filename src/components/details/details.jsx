@@ -2,7 +2,6 @@ import "./details.css";
 import { useState } from "react";
 import Player from "../Player/Player";
 const Details = ({ data }) => {
-  console.log("data", data);
   const [modalIsOpen, setModalIsOpen] = useState(false);
 
   const toggleModal = () => {

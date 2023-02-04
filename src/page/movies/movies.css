@@ -35,9 +35,10 @@
   background-color: rgba(139, 27, 27, 0.227);
   display: flex;
   color: white;
-  position: relative;
-  padding: 20px;
-  margin: 0 auto;
+  position: fixed;
+  right: 5%;
+  bottom: 0px;
+  align-self: center;
   justify-content: center;
   align-items: center;
   z-index: 1000;
