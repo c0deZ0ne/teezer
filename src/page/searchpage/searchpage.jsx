@@ -1,50 +1,27 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import MovieCard from "../../components/movieCard/MovieCard";
 import Navbar from "../../components/navbar/navbar";
-import { apiPopular, getData, useSearch } from "../../utils/axios";
+import { useSearch } from "../../utils/axios";
 import "./searchpage.css";
 import Loader from "../../components/loader/Loader";
 
 const SearchPage = () => {
-  const [searchParam, setSearchParam] = useState("true");
-  const [searchData, setSearchData] = useState(null);
-  const [movies, setMovies] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
-  const file = useSearch(searchData);
+  const [searchParam, setSearchParam] = useState(null);
+
+  const [url, setUrl] = useState(null);
+  const { data, loading, error } = useSearch(url);
+  const [searchType, setSearchType] = useState(loading);
 
   const handleChange = (e) => {
     setSearchParam(e.target.value);
-
-    setIsLoading(true);
+    setSearchType(true);
   };
   const handleSearch = async () => {
-    setIsLoading(true);
-    setSearchData(searchParam);
-    console.log(file());
-    // allD();
-    // const data = await getData(searchParam);
-
-    // setMovies(data.results);
-    // setIsLoading(false);
+    setUrl(searchParam);
+    setSearchType(false);
   };
 
-  const [movieData, setData] = useState([]);
-  const [error, setError] = useState(null);
-
-  useEffect(() => {
-    setIsLoading(true);
-    apiPopular()
-      .then((data) => {
-        const { errorMessage, items } = data;
-        errorMessage ? setError(errorMessage) : setData(items);
-        setIsLoading(false);
-      })
-      .catch((err) => {
-        const { errorMessage } = err;
-        setError(errorMessage);
-        setIsLoading(false);
-      });
-  }, []);
+  console.log(data);
 
   return (
     <div>
@@ -68,16 +45,17 @@ const SearchPage = () => {
         </label>
 
         <>
-          {isLoading ? (
+          {console.log(loading)}
+          {searchType || loading ? (
             <Loader />
           ) : (
             <>
               {error ? (
                 <div className='error'>{"something went wrong ..."}</div>
               ) : (
-                movieData && (
+                data && (
                   <div className='container'>
-                    {movies.map((data) => (
+                    {data.map((data) => (
                       <MovieCard data={data} />
                     ))}
                   </div>

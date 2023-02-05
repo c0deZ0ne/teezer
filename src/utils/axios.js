@@ -1,7 +1,6 @@
 import axios from "axios";
-import { useCallback } from "react";
-
-const apiKey = "k_7hy954ha";
+import { useState, useEffect, useCallback } from "react";
+const apiKey = "k_0pq55gfz";
 const baseURL = `https://imdb-api.com/en`;
 const config = {
   headers: {
@@ -10,35 +9,34 @@ const config = {
   },
 };
 
-// export const searchAll = async (searchParam) => {
-//   try {
-//     const res = await axios.get(
-//       `${baseURL}/API/SearchTitle/${apiKey}/${searchParam}`,
-//       config
-//     );
-//     console.log(res);
-//     return res.data;
-//   } catch (error) {
-//     return error.message;
-//   }
-// };
-
-export const useSearch = (url) => {
-  console.log(url);
-  const data = useCallback(() => {
+export function useSearch(url) {
+  const [data, setData] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
+  const fetchData = useCallback(async () => {
     try {
-      axios.get(`${baseURL}/${url}/${apiKey}`).then((res) => {
-        localStorage.setItem("series", JSON.stringify(res.data.items));
-        // console.log(res);
-        return res.data;
-      });
+      setError(null);
+      setLoading(true);
+      const res = await axios.get(`${baseURL}/API/SearchAll/${apiKey}/${url}`);
+      const { errorMessage, results } = res.data;
+      console.log(results);
+      if (errorMessage) {
+        throw errorMessage;
+      }
+      setData(results);
+      setLoading(false);
     } catch (error) {
-      return error.message;
+      setError(error);
+      setLoading(false);
     }
   }, [url]);
 
-  return data
-};
+  useEffect(() => {
+    fetchData();
+  }, [fetchData]);
+
+  return { data, loading, error };
+}
 
 export const getData = async (expression) => {
   try {
@@ -69,7 +67,7 @@ export const getAllInfo = async (id) => {
 export const apiPopular = async (id) => {
   try {
     const res = await axios.get(`${baseURL}/API/MostPopularMovies/${apiKey}`);
-    console.log(res);
+    // console.log(res);
     return res.data;
   } catch (error) {
     return error.message;
@@ -80,7 +78,6 @@ export const fetchData = async (url) => {
   try {
     const res = await axios.get(`${baseURL}/${url}/${apiKey}`);
     localStorage.setItem("series", JSON.stringify(res.data.items));
-    console.log(res);
     return res.data;
   } catch (error) {
     return error.message;
@@ -90,8 +87,6 @@ export const fetchData = async (url) => {
 export const getSeries = async (url) => {
   try {
     const res = await axios.get(`${baseURL}/API/SearchSeries/${apiKey}/${url}`);
-    // localStorage.setItem('series',JSON.stringify(res.data.items))
-    console.log(res);
     return res.data;
   } catch (error) {
     return error.message;
